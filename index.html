@@ -1,0 +1,414 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>KUCZYNSKI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;700;800;900&display=swap">
+<style>
+/* Disco vermelho, tipografia suíça em preto, texto distorcido como lente. Cada seção é um campo de cor chapada; o disco reaparece como capa do single. */
+/* Preto como campo principal; vermelho só no disco e em pequenos detalhes. */
+:root{
+  color-scheme: dark;
+  --red:#E01E1E; --paper:#080808; --ink:#F1F1EE; --mist:#0F0F0F; --line:#2B2B2B; --dim:#7E7E7E; --soft:#BDBDBD;
+  --face:"Archivo","Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;text-size-adjust:100%;overflow-x:clip}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--face);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:hidden;-webkit-tap-highlight-color:transparent}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--paper)}
+img{max-width:100%;height:auto;display:block}
+a{color:inherit}
+a,button{touch-action:manipulation}
+:focus-visible{outline:3px solid var(--red);outline-offset:3px}
+.wrap{max-width:1180px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.band>.wrap{padding-block:clamp(64px,9vw,120px)}
+.label{font-weight:700;font-size:13px;letter-spacing:.14em;text-transform:uppercase;margin:0 0 20px}
+h2{font-weight:900;line-height:.92;letter-spacing:-.045em;font-size:clamp(46px,9vw,128px);margin:0 0 28px;text-wrap:balance}
+.lede{font-size:clamp(18px,2vw,22px);line-height:1.5;max-width:58ch;margin:0 0 16px}
+
+.btn{display:inline-flex;align-items:center;gap:10px;font-family:var(--face);font-weight:800;font-size:15px;letter-spacing:.02em;padding:14px 24px;border:1px solid var(--ink);border-radius:999px;background:var(--ink);color:var(--paper);text-decoration:none;transition:background .15s,color .15s,border-color .15s}
+.btn.dark,.btn.line{background:transparent;color:var(--ink)}
+.btn.light{background:var(--ink);color:var(--paper)}
+
+/* topo */
+.top{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--paper);border-bottom:1px solid var(--line)}
+.top .wrap{display:flex;align-items:center;gap:22px;padding-block:10px}
+.brand{font-weight:900;font-size:22px;letter-spacing:-.04em;text-decoration:none}
+.nav{display:flex;gap:22px;margin-left:auto;flex-wrap:wrap}
+.nav a{font-weight:700;font-size:13px;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;padding-block:6px}
+.top .btn{padding:8px 16px;font-size:14px}
+
+/* capa */
+.cover{position:relative;overflow:hidden;border-bottom:1px solid var(--line)}
+.cover-img{position:absolute;inset:0}
+.cover-img img{width:100%;height:100%;object-fit:cover;object-position:58% 30%;filter:grayscale(1) contrast(1.15) brightness(.85)}
+.cover-img::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(8,8,8,.45) 0%,rgba(8,8,8,.05) 38%,rgba(8,8,8,.7) 72%,var(--paper) 100%)}
+.credito-capa{position:absolute;left:max(16px,env(safe-area-inset-left,0px));top:18px;z-index:2;font-weight:700;font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--soft)}
+.cover .wrap{position:relative;z-index:2;min-height:min(94vh,860px);display:flex;flex-direction:column;justify-content:flex-end;padding-top:140px;padding-bottom:clamp(28px,4vw,48px)}
+.cover .wordmark{margin:0 0 clamp(20px,3vw,36px);color:var(--ink)}
+.cover-row{display:flex;gap:clamp(20px,4vw,56px);align-items:flex-end;justify-content:space-between;flex-wrap:wrap;border-top:1px solid var(--soft);padding-top:18px}
+.cover-row .kicker{margin:0;max-width:30ch}
+.cover-row .tags{margin:0;flex-direction:row;gap:18px;flex-wrap:wrap}
+.cover-row .tags li{border:0;padding:0;color:var(--soft)}
+.cover .wrap{padding-top:clamp(28px,4vw,52px);padding-bottom:clamp(40px,6vw,72px)}
+.wordmark{font-weight:900;font-size:clamp(44px,15.6vw,214px);line-height:.82;letter-spacing:-.06em;margin:0 0 clamp(24px,4vw,48px);white-space:nowrap}
+.cover-grid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1.05fr) minmax(0,1.25fr);gap:clamp(18px,3vw,40px);align-items:center}
+.kicker{font-size:clamp(20px,2.3vw,26px);font-weight:700;line-height:1.2;letter-spacing:-.01em;margin:0 0 24px}
+.tags{list-style:none;padding:0;margin:0 0 28px;display:flex;flex-direction:column;gap:4px;font-weight:700;font-size:13px;letter-spacing:.14em;text-transform:uppercase}
+.tags li{border-top:1px solid var(--line);padding-top:8px}
+.cta{display:flex;gap:12px;flex-wrap:wrap}
+.shot{margin:0;position:relative}
+.shot img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:78% 30%;filter:grayscale(1) contrast(1.08)}
+.shot figcaption{position:absolute;left:0;bottom:-26px;font-size:12px;font-weight:500;letter-spacing:.06em;color:var(--dim)}
+.disc{position:relative;width:100%;aspect-ratio:1}
+.disc svg{width:100%;height:100%;display:block;overflow:visible}
+.ring{transform-origin:300px 300px;animation:gira 90s linear infinite}
+@keyframes gira{to{transform:rotate(360deg)}}
+
+/* faixa */
+.ticker{background:var(--paper);color:var(--ink);border-block:1px solid var(--line);overflow:hidden;padding-block:14px}
+.ticker-track{display:flex;width:max-content;animation:tick 50s linear infinite;will-change:transform}
+.ticker span{font-weight:900;text-transform:uppercase;font-size:clamp(20px,2.6vw,30px);letter-spacing:-.01em;white-space:nowrap;padding-right:40px}
+.ticker span i{font-style:normal;margin-left:40px;color:var(--red);font-size:.6em;vertical-align:middle}
+@keyframes tick{to{transform:translate3d(-50%,0,0)}}
+
+/* artista */
+#artista{background:var(--paper)}
+.artista-grid{display:grid;grid-template-columns:minmax(0,1fr);gap:clamp(28px,5vw,80px);align-items:start}
+#artista h2.nome-grande{max-width:none;font-size:clamp(44px,15.2vw,206px);line-height:.82;letter-spacing:-.06em;white-space:nowrap;margin-bottom:clamp(28px,4vw,48px)}
+.fichas{display:flex;flex-direction:column}
+.ficha{border-top:1px solid var(--line);padding:14px 0 16px}
+.ficha:last-child{border-bottom:1px solid var(--line)}
+.ficha span{display:block;font-weight:700;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--red)}
+.ficha b{display:block;font-size:clamp(20px,2.2vw,26px);line-height:1.2;letter-spacing:-.02em;margin-top:4px}
+
+/* música */
+#musica{background:var(--paper);color:var(--ink);border-block:1px solid var(--line)}
+.single{display:grid;grid-template-columns:minmax(0,.9fr) minmax(0,1.1fr);gap:clamp(28px,5vw,72px);align-items:center;margin-top:12px}
+.single .disc{max-width:520px}
+.single-info .tipo{font-weight:700;font-size:13px;letter-spacing:.14em;text-transform:uppercase}
+.single-info .nome{display:block;font-weight:900;font-size:clamp(64px,10vw,136px);line-height:.85;letter-spacing:-.06em;margin:8px 0 14px}
+.single-info p{font-size:clamp(18px,2vw,22px);margin:0 0 24px;max-width:34ch;font-weight:500}
+.lista{margin-top:clamp(48px,7vw,88px);border-top:1px solid var(--line)}
+.lista h3{font-weight:700;font-size:13px;letter-spacing:.14em;text-transform:uppercase;margin:16px 0 0}
+.faixa{display:grid;grid-template-columns:minmax(0,1.6fr) 140px minmax(0,1.5fr) 140px;gap:20px;align-items:baseline;padding:18px 0;border-bottom:1px solid var(--line)}
+.faixa:first-of-type{margin-top:12px;border-top:1px solid var(--line)}
+.faixa .nome{font-weight:900;font-size:clamp(24px,3.2vw,40px);letter-spacing:-.04em;line-height:1}
+.faixa .tipo{font-weight:700;font-size:12px;letter-spacing:.14em;text-transform:uppercase}
+.faixa .desc{font-size:16px;line-height:1.4}
+.faixa .quando{font-weight:800;font-size:14px;text-align:right;letter-spacing:.02em;font-variant-numeric:tabular-nums}
+
+/* o som */
+#som{background:var(--mist);color:var(--ink)}
+#som .lede{color:var(--soft)}
+.linhas-som{margin:44px -16px 0;border-top:1px solid var(--line)}
+.ls{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,260px);gap:12px 32px;align-items:end;padding:clamp(14px,2vw,22px) 16px;border-bottom:1px solid var(--line);transition:background .12s,color .12s}
+.ls h3{margin:0;font-weight:900;font-size:clamp(38px,6.8vw,96px);line-height:.9;letter-spacing:-.065em;text-wrap:nowrap}
+.ls p{margin:0 0 6px;font-size:15px;line-height:1.4;color:var(--soft)}
+.ls.ela h3{color:var(--red)}
+@media (hover:hover){.ls:hover{background:var(--ink);color:var(--paper)}.ls:hover p{color:var(--paper)}.ls.ela:hover h3{color:var(--red)}}
+@media (max-width:700px){.ls{grid-template-columns:1fr}}
+
+/* fotos: colagem torta, xerox, numeração fora de ordem */
+#fotos{background:var(--paper);border-block:1px solid var(--line);overflow:hidden}
+.flash{position:relative;font-weight:900;font-size:clamp(150px,48vw,620px);line-height:.74;letter-spacing:-.08em;margin:0 0 clamp(8px,2vw,24px) -.05em;white-space:nowrap;text-transform:uppercase;transform:rotate(-1.6deg);transform-origin:left bottom;z-index:0}
+.flash::before{content:attr(data-text);position:absolute;left:.025em;top:.02em;color:transparent;-webkit-text-stroke:2px var(--red);z-index:-1;pointer-events:none}
+.zine{display:grid;grid-template-columns:repeat(12,minmax(0,1fr));gap:14px;align-items:start;padding-bottom:40px}
+.f{margin:0;position:relative;background:#000;z-index:1}
+.f img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.35) brightness(.95)}
+.f figcaption{position:absolute;font-weight:800;font-size:11px;letter-spacing:.14em;text-transform:uppercase;background:var(--ink);color:var(--paper);padding:3px 7px;z-index:2}
+.f::before{content:"";position:absolute;width:84px;height:24px;background:rgba(241,241,238,.78);top:-12px;left:50%;transform:translateX(-50%) rotate(-4deg);z-index:2}
+.f1{grid-column:1/5;grid-row:1;aspect-ratio:2/3;transform:rotate(-2.2deg)}
+.f1 figcaption{left:-6px;bottom:18px}
+.f2{grid-column:5/13;grid-row:1;aspect-ratio:3/2;margin-top:110px;transform:rotate(1.1deg)}
+.f2 figcaption{right:12px;top:-10px}
+.f4{grid-column:3/8;grid-row:2;aspect-ratio:2/3;margin-top:-110px;transform:rotate(2.6deg);z-index:3}
+.f4 figcaption{right:-8px;top:34px}
+.fotos-cta{margin-top:8px;transform:rotate(-1deg)}
+
+/* referências */
+#escuta{background:var(--paper)}
+.refs{list-style:none;margin:20px 0 0;padding:0;border-top:1px solid var(--line)}
+.refs li{font-weight:900;font-size:clamp(34px,7vw,96px);line-height:1;letter-spacing:-.05em;padding:12px 0 14px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:baseline;gap:16px}
+.refs li small{font-weight:700;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--red);white-space:nowrap}
+
+/* redes */
+#redes{background:var(--paper);border-block:1px solid var(--line)}
+.redes{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:20px;margin-top:28px}
+.rede{display:flex;flex-direction:column;gap:6px;text-decoration:none;background:var(--mist);border:1px solid var(--line);color:var(--ink);padding:26px 26px 30px;border-radius:2px;transition:background .15s,color .15s}
+.rede .plat{font-weight:700;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--red)}
+.rede .handle{font-weight:900;font-size:clamp(30px,4.6vw,56px);letter-spacing:-.05em;line-height:1;word-break:break-word}
+.rede .desc{font-size:16px;color:var(--soft)}
+
+/* contato */
+#contato{background:var(--mist);color:var(--ink)}
+.quem{font-weight:800;font-size:clamp(22px,2.6vw,30px);letter-spacing:-.02em;margin:0 0 4px}
+.quem-sub{font-weight:700;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--red);margin:0 0 30px}
+.linhas{display:flex;flex-direction:column;gap:14px;align-items:flex-start}
+.linha{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
+.linha .tag{font-weight:700;font-size:12px;letter-spacing:.14em;text-transform:uppercase;color:var(--dim);width:92px}
+.linha .val{font-size:clamp(19px,2.4vw,26px);font-weight:700;letter-spacing:-.01em;font-variant-numeric:tabular-nums;word-break:break-word;user-select:all}
+.copiar{font-family:var(--face);font-size:12px;font-weight:800;letter-spacing:.08em;text-transform:uppercase;background:transparent;color:var(--ink);border:1px solid var(--dim);padding:6px 12px;border-radius:999px;cursor:pointer}
+.copiar[data-ok="1"]{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+#contato .cta{margin-top:36px}
+
+.rodape{background:var(--paper);color:var(--dim);border-top:1px solid var(--line)}
+.rodape .wrap{padding-block:22px;display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-weight:700;font-size:12px;letter-spacing:.14em;text-transform:uppercase}
+
+main,.rodape{position:relative}
+#som,#contato{background:var(--mist)}
+@media (max-width:900px){
+  .cover-grid{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+  .cover-grid .disc{grid-column:1/-1;max-width:520px;margin-inline:auto}
+  .artista-grid,.single{grid-template-columns:1fr}
+  .faixa{grid-template-columns:minmax(0,1fr) auto;gap:6px 16px}
+  .faixa .tipo{order:3}
+  .faixa .desc{grid-column:1/-1;order:4}
+}
+@media (max-width:640px){
+  .nav{display:none}
+  .top .btn{margin-left:auto}
+  .cover-grid{grid-template-columns:1fr}
+  .shot{max-width:420px}
+  .zine{grid-template-columns:repeat(6,minmax(0,1fr));gap:12px}
+  .f1{grid-column:1/5;grid-row:auto}.f2{grid-column:2/7;grid-row:auto;margin-top:20px}.f4{grid-column:3/7;grid-row:auto;margin-top:0}
+  .redes{grid-template-columns:1fr}
+  .refs li{flex-direction:column;gap:2px}
+}
+@media (hover:hover){
+  .btn:hover{background:var(--red);color:#fff;border-color:var(--red)}
+  .nav a:hover{color:var(--red)}
+  .rede:hover{border-color:var(--ink)}
+  .f:hover img{filter:grayscale(1) invert(1) contrast(1.35)}
+  .copiar:hover{background:var(--ink);color:var(--paper)}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .ticker-track,.ring,.cover .disc svg
+  *{transition:none!important}
+}
+</style>
+
+</head>
+<body>
+<!-- disco: texto em lente, anel de texto espelhado, miolo com "presents" -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <filter id="lente" x="-10%" y="-10%" width="120%" height="120%">
+      <feTurbulence type="fractalNoise" baseFrequency="0.011" numOctaves="2" seed="11" result="n"/>
+      <feDisplacementMap in="SourceGraphic" in2="n" scale="30" xChannelSelector="R" yChannelSelector="G"/>
+    </filter>
+    <filter id="mancha" x="-10%" y="-10%" width="120%" height="120%">
+      <feGaussianBlur stdDeviation="1.6" result="b"/>
+      <feTurbulence type="fractalNoise" baseFrequency="0.008" numOctaves="2" seed="3" result="n"/>
+      <feDisplacementMap in="b" in2="n" scale="46"/>
+    </filter>
+    <clipPath id="corte"><circle cx="300" cy="300" r="290"/></clipPath>
+    <path id="arco" d="M 85 300 A 215 215 0 1 1 515 300 A 215 215 0 1 1 85 300"/>
+    <g id="disco-conteudo">
+      <circle cx="300" cy="300" r="290" fill="#E01E1E"/>
+      <g clip-path="url(#corte)">
+        <g class="ring" opacity=".9" filter="url(#mancha)">
+          <text font-family="Archivo,Helvetica,Arial,sans-serif" font-weight="900" font-size="66" letter-spacing="-2" fill="#0B0B0B"><textPath href="#arco" startOffset="0">KUCZYNSKI  DON'T  KUCZYNSKI  DON'T  KUCZYNSKI  DON'T </textPath></text>
+        </g>
+        <g filter="url(#lente)" font-family="Archivo,Helvetica,Arial,sans-serif" font-weight="800" fill="#0B0B0B">
+          <text x="128" y="250" font-size="52" letter-spacing="-2">KUCZYNSKI</text>
+          <text x="128" y="312" font-size="42" font-weight="700" letter-spacing="-1">presents</text>
+          <text x="128" y="398" font-size="104" font-weight="900" letter-spacing="-6">DON'T</text>
+        </g>
+        <circle cx="300" cy="300" r="7" fill="#fff"/>
+        <circle cx="300" cy="300" r="268" fill="none" stroke="#0B0B0B" stroke-opacity=".22" stroke-width="1.5"/>
+        <circle cx="300" cy="300" r="120" fill="none" stroke="#0B0B0B" stroke-opacity=".14" stroke-width="1.5"/>
+      </g>
+    </g>
+  </defs>
+</svg>
+
+<header class="top">
+  <div class="wrap">
+    <a class="brand" href="#topo">KUCZYNSKI</a>
+    <nav class="nav" aria-label="Seções">
+      <a href="#artista">artista</a>
+      <a href="#musica">música</a>
+      <a href="#som">som</a>
+      <a href="#fotos">fotos</a>
+      <a href="#redes">redes</a>
+      <a href="#contato">contato</a>
+    </nav>
+    <a class="btn" href="https://open.spotify.com/track/2qv7V2XPb2Z24Qf6f6VF9z" target="_blank" rel="noopener">Ouvir</a>
+  </div>
+</header>
+
+<main id="topo">
+  <section class="cover" aria-label="Apresentação">
+    <div class="cover-img"><img src="p-hero.jpg" width="1500" height="1000" decoding="async" alt="Retrato em preto e branco de Vivian Kuczynski à noite, de jaqueta de veludo cotelê, com uma luz estourada no canto"></div>
+    <div class="wrap">
+      <h1 class="wordmark">KUCZYNSKI</h1>
+      <div class="cover-row">
+        <p class="kicker">Synth-pop pra quem prefere a pista escura.</p>
+        <div class="cta">
+          <a class="btn" href="https://open.spotify.com/track/2qv7V2XPb2Z24Qf6f6VF9z" target="_blank" rel="noopener">Ouvir DON'T</a>
+          <a class="btn line" href="https://untitled.stream/library/project/LtjrfPGJvdVsqCkbFTVQd" target="_blank" rel="noopener">Unreleased</a>
+          <a class="btn line" href="KUCZYNSKI_Press_Kit.pdf" target="_blank" rel="noopener">Press kit</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class="ticker" aria-hidden="true">
+    <div class="ticker-track">
+      <span>DON'T, o novo single<i>●</i></span>
+      <span>Synth-pop<i>●</i></span>
+      <span>Dance alternativo<i>●</i></span>
+      <span>Post-punk<i>●</i></span>
+      <span>Los Angeles / Brasil<i>●</i></span>
+      <span>EP KUCZYNSKI, 30.04.2026<i>●</i></span>
+      <span>DON'T, o novo single<i>●</i></span>
+      <span>Synth-pop<i>●</i></span>
+      <span>Dance alternativo<i>●</i></span>
+      <span>Post-punk<i>●</i></span>
+      <span>Los Angeles / Brasil<i>●</i></span>
+      <span>EP KUCZYNSKI, 30.04.2026<i>●</i></span>
+    </div>
+  </div>
+
+  <section class="band" id="artista">
+    <div class="wrap">
+      <p class="label">a artista</p>
+      <h2 class="nome-grande">KUCZYNSKI</h2>
+      <div class="artista-grid">
+        <div>
+          <p class="lede">KUCZYNSKI é o projeto autoral da produtora musical brasileira Vivian Kuczynski, hoje baseada em Los Angeles. Antes de se lançar como artista, Vivian consolidou uma carreira relevante nos bastidores da música brasileira, com trabalhos ao lado de Pabllo Vittar, Jão, Alice Caymmi, Carol Biazin e NX Zero.</p>
+          <p class="lede">Aos 23 anos, ela constrói sua trajetória internacional com um projeto que reflete integralmente sua visão estética e sonora: referências retrô com uma abordagem contemporânea, entre o pop e a música eletrônica alternativa, guiada por bases rítmicas pulsantes com influências de post-punk.</p>
+          <p class="lede">Tudo no projeto é escrito, produzido, mixado e masterizado por ela mesma.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="musica">
+    <div class="wrap">
+      <p class="label">música</p>
+      <h2>O novo single</h2>
+      <div class="single">
+        <div class="disc" role="img" aria-label="Disco vermelho com o texto KUCZYNSKI presents DON'T">
+          <svg viewBox="0 0 600 600"><use href="#disco-conteudo"/></svg>
+        </div>
+        <div class="single-info">
+          <span class="tipo">último single · 23 de setembro de 2026</span>
+          <span class="nome">DON'T</span>
+          <p>O single mais recente de KUCZYNSKI, no Spotify.</p>
+          <div class="cta">
+            <a class="btn dark" href="https://open.spotify.com/track/2qv7V2XPb2Z24Qf6f6VF9z" target="_blank" rel="noopener">Ouvir no Spotify</a>
+            <a class="btn line" href="https://untitled.stream/library/project/LtjrfPGJvdVsqCkbFTVQd" target="_blank" rel="noopener">Unreleased</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="som">
+    <div class="wrap">
+      <p class="label">o som</p>
+      <h2>Frio, eletrônico, retrô-contemporâneo</h2>
+      <p class="lede">O som de KUCZYNSKI mistura synth-pop e dance alternativo com base rítmica pulsante e influências de post-punk.</p>
+      <div class="linhas-som">
+        <div class="ls"><h3>Synth-pop</h3><p>Melodia de sintetizador com referência retrô e acabamento de hoje.</p></div>
+        <div class="ls"><h3>Dance alternativo</h3><p>Música de pista que anda pelos limites entre o pop e a eletrônica alternativa.</p></div>
+        <div class="ls"><h3>Pulso de post-punk</h3><p>Bases rítmicas pulsantes, num universo frio e eletrônico.</p></div>
+        <div class="ls ela"><h3>Feito por ela</h3><p>Escrita, produção, mix e masterização assinadas pela própria Vivian.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="fotos">
+    <div class="wrap">
+      <h2 class="flash" data-text="ELA">ELA</h2>
+      <div class="zine">
+        <figure class="f f1"><img src="p-extra.jpg" loading="lazy" decoding="async" alt="Vivian de baixo para cima, ao lado de uma árvore, em preto e branco"><figcaption>fig. 06</figcaption></figure>
+        <figure class="f f2"><img src="p-ghost.jpg" loading="lazy" decoding="async" alt="Vivian de casaco, com o rosto estourado de luz, sob uma árvore à noite"><figcaption>fig. 02</figcaption></figure>
+        <figure class="f f4"><img src="p-tree.jpg" loading="lazy" decoding="async" alt="Retrato de Vivian à noite, com os galhos de uma árvore ao fundo"><figcaption>fig. 04</figcaption></figure>
+      </div>
+      <div class="cta fotos-cta">
+        <a class="btn line" href="https://drive.google.com/drive/folders/1zYZY6rhsWUEI_1QfyM9tHR1rDyd6sbLN?usp=sharing" target="_blank" rel="noopener">Pasta no Google Drive</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="escuta">
+    <div class="wrap">
+      <p class="label">referências de som</p>
+      <h2>Pra quem escuta</h2>
+      <ul class="refs">
+        <li>Molchat Doma</li>
+        <li>She Past Away</li>
+        <li>Drab Majesty</li>
+        <li>La Femme</li>
+        <li>Boy Harsher</li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="band" id="redes">
+    <div class="wrap">
+      <p class="label">redes</p>
+      <div class="redes">
+        <a class="rede" href="https://www.instagram.com/viviankuczynski/" target="_blank" rel="noopener">
+          <span class="plat">instagram</span><span class="handle">@viviankuczynski</span><span class="desc">Perfil oficial no Instagram</span>
+        </a>
+        <a class="rede" href="https://www.tiktok.com/@viviankuczynski" target="_blank" rel="noopener">
+          <span class="plat">tiktok</span><span class="handle">@viviankuczynski</span><span class="desc">Perfil oficial no TikTok</span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="contato">
+    <div class="wrap">
+      <p class="label">management</p>
+      <p class="quem">Johayna El Mouallem</p>
+      <p class="quem-sub">mouallem management</p>
+      <div class="linhas">
+        <div class="linha"><span class="tag">e-mail</span><span class="val">Jo@mouallemmgmt.com</span><button class="copiar" type="button" data-copy="Jo@mouallemmgmt.com">Copiar</button></div>
+        <div class="linha"><span class="tag">brasil</span><span class="val">+55 11 97206-9864</span><button class="copiar" type="button" data-copy="+55 11 97206-9864">Copiar</button></div>
+        <div class="linha"><span class="tag">eua</span><span class="val">+1 310 729-5548</span><button class="copiar" type="button" data-copy="+1 310 729-5548">Copiar</button></div>
+      </div>
+      <div class="cta">
+        <a class="btn light" href="KUCZYNSKI_Press_Kit.pdf" target="_blank" rel="noopener">Abrir press kit (PDF)</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="rodape">
+  <div class="wrap">
+    <span>mouallemmgmt</span>
+    <span>© 2026 KUCZYNSKI</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  document.querySelectorAll(".copiar").forEach(function(b){
+    b.addEventListener("click", function(){
+      var txt = b.getAttribute("data-copy");
+      function ok(){ b.textContent = "Copiado"; b.setAttribute("data-ok","1");
+        setTimeout(function(){ b.textContent = "Copiar"; b.removeAttribute("data-ok"); }, 1800); }
+      function selecionar(){
+        var alvo = b.previousElementSibling;
+        var r = document.createRange(); r.selectNodeContents(alvo);
+        var s = window.getSelection(); s.removeAllRanges(); s.addRange(r);
+        b.textContent = "Selecionado";
+        setTimeout(function(){ b.textContent = "Copiar"; }, 1800);
+      }
+      try { navigator.clipboard.writeText(txt).then(ok, selecionar); } catch(e) { selecionar(); }
+    });
+  });
+})();
+</script>
+
+</body>
+</html>
